@@ -1,0 +1,102 @@
+<div class="col-md-12">
+    <button nbButton status="success" (click)="criarWorkflow = !criarWorkflow">+ Criar Novo Workflow</button>
+</div>
+
+<div *ngIf="criarWorkflow" class="col-md-12 mt-3">
+    <nb-card>
+        <nb-card-body>
+
+            <form class="mt-3 mb-3" [formGroup]="formWorkflow">
+
+                <div class="row mb-4">
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleFormControlInput1">Nome</label>
+                                <input name="name" type="text" fullWidth nbInput id="exampleFormControlInput1"
+                                    placeholder="Ex: Meu primeiro workflow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" formArrayName="atividades" *ngFor="let ref of listaAtividades.controls let i = index">
+
+                    <div [FormGroupname]="i" class="col-md-12 row">
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleFormControlInput1">Nome da Atividade</label>
+                                <input name="name" type="text" fullWidth nbInput id="exampleFormControlInput1"
+                                    placeholder="Ex: Minha primeira atividade">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleFormControlInput1">Pessoa Reponsável</label>
+                                <input name="name" type="text" fullWidth nbInput id="exampleFormControlInput1"
+                                    placeholder="Ex: João Carlos">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleFormControlInput1">Tempo de execução</label>
+                                <input name="name" type="text" fullWidth nbInput id="exampleFormControlInput1"
+                                    placeholder="Ex: 2 dias">
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group ">
+                                <button style="margin-top: 28px;" id="exampleFormControlInput1" nbButton outline
+                                    status="danger" (click)="removerAtividade(i)">X</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-2">
+                    <button nbButton status="success" (click)="adicionarAtividade()">+ Adicionar
+                        Atividade</button>
+                </div>
+
+            </form>
+
+        </nb-card-body>
+    </nb-card>
+</div>
+
+<div class="col-md-12 mt-3 mb-3">
+    <nb-card>
+        <nb-card-body>
+
+            <table [nbTreeGrid]="workFlowService.data" equalColumnsWidth>
+
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: workFlowService.allColumns"></tr>
+
+                <ng-container nbTreeGridColumnDef="name">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>name</th>
+                    <td nbTreeGridCell style="width: 80%;" *nbTreeGridCellDef="let row"> {{row.data.name}} </td>
+                </ng-container>
+
+                <ng-container nbTreeGridColumnDef="editar">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>editar</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" style="width: 10%;"><button style="width: 100%;"
+                            nbButton status="warning">Editar</button></td>
+                </ng-container>
+
+                <ng-container nbTreeGridColumnDef="remover">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>remover</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" style="width: 10%;"><button style="width: 100%;"
+                            nbButton status="danger">Remover</button></td>
+                </ng-container>
+
+            </table>
+
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -1,0 +1,105 @@
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Olá! Bem-vindo a aplicação de padronização de processo.</p>
+
+<!-- <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+  <p class="alert-title"><b>Oh snap!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+  <p class="alert-title"><b>Hooray!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+  </ul>
+</nb-alert> -->
+
+<form (ngSubmit)="login()" [formGroup]="formLogin" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">Email:</label>
+    <input nbInput fullWidth formControlName="usuario" name="email" id="input-email" pattern=".+@.+\..+"
+      placeholder="Endeço de email" fieldSize="large" autofocus
+      [status]="usuario.dirty ? (usuario.invalid  ? 'danger' : 'success') : 'basic'"
+      [attr.aria-invalid]="usuario.invalid && usuario.touched ? true : null">
+
+    <ng-container *ngIf="usuario.invalid && usuario.touched">
+      <p class="caption status-danger" *ngIf="usuario.errors?.required">
+        O email é obrigatório!
+      </p>
+      <p class="caption status-danger" *ngIf="usuario.errors?.pattern">
+        O e-mail deve ser o verdadeiro!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    
+    <span class="label-with-link">
+      <label class="label" for="input-password">Senha:</label>
+      <a class="forgot-password caption-2" routerLink="../request-password">Esqueceu a senha?</a>
+    </span>
+
+    <input nbInput fullWidth 
+    formControlName="senha" 
+    name="password" 
+    type="password" 
+    id="input-password"
+    placeholder="Senha"
+    fieldSize="large" 
+    [status]="senha.dirty ? (senha.invalid  ? 'danger' : 'success') : 'basic'"
+    [required]="true" [attr.aria-invalid]="senha.invalid && senha.touched ? true : null">
+    
+    <ng-container *ngIf="senha.invalid && senha.touched">
+
+      <p class="caption status-danger" *ngIf="senha.errors?.required">
+        Senha requerida!
+      </p>
+      
+      <p class="caption status-danger" *ngIf="senha.errors?.minlength || senha.errors?.maxlength">
+        A senha deve conter
+        de 10
+        a 32
+        caracteres
+      </p>
+    </ng-container>
+
+  </div>
+
+  <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe">Lembre de mim</nb-checkbox>
+  </div>
+
+  <button nbButton fullWidth status="primary" size="large" [class.btn-pulse]="submitted">
+    Entrar
+  </button>
+</form>
+
+<!-- <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  or enter with:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link"
+         [routerLink]="socialLink.link"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+      <a *ngIf="socialLink.url"
+         [attr.href]="socialLink.url"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+    </ng-container>
+  </div>
+</section> -->
+
+<section class="another-action" aria-label="Register">
+  Não possui conta? <a class="text-link" routerLink="../register">Registre-se</a>
+</section>

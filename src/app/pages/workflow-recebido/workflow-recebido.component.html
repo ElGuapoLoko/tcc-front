@@ -1,0 +1,31 @@
+<div class="col-md-12 mt-3 mb-3">
+    <nb-card>
+        <nb-card-header>WorkFlow Recebido</nb-card-header>
+        <nb-card-body>
+
+            <table [nbTreeGrid]="workFlowService.data" equalColumnsWidth>
+
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: workFlowService.allColumns"></tr>
+
+                <ng-container nbTreeGridColumnDef="name">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>name</th>
+                    <td nbTreeGridCell style="width: 80%;" *nbTreeGridCellDef="let row"> {{row.data.name}} </td>
+                </ng-container>
+
+                <ng-container nbTreeGridColumnDef="editar">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>editar</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" style="width: 10%;">
+                        <button style="width: 100%;" nbButton status="primary">Visualizar</button>
+                    </td>
+                </ng-container>
+
+                <ng-container nbTreeGridColumnDef="remover">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>remover</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" style="display: none;"></td>
+                </ng-container>
+
+            </table>
+
+        </nb-card-body>
+    </nb-card>
+</div>
