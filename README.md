@@ -1,4 +1,4 @@
-# <h1 align="center"> **EducAi Frontend** </h1>
+# <h1 align="center"> **TCC Frontend** </h1>
 
 ## SOBRE O PROJETO:
 #### Nosso projeto tem como premissa fornecer um sistema de gestão de processos de uma empresa
@@ -22,9 +22,8 @@ Rode `ng build` para gerar o build final do projeto que vai estar na pasta `dist
 3 - Git
 
 ## Equipe
-
 Henrique Siqueira \
-Isabella \
-Daniel \
-Eurico Neto \
-Leticia
+Wallyso Moura \
+Ketley \
+Breno
+
